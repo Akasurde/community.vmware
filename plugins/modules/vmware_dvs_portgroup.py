@@ -98,6 +98,7 @@ options:
             - The secondary private VLAN ID.
             - The secondary private VLAN ID need to be configured on the dvSwitch first.
         type: int
+        version_added: '1.5.0'
     vlan_trunk_range:
         description:
             - The VLAN trunk range that should be configured with the portgroup.
@@ -241,11 +242,13 @@ options:
             - Indicates if NetFlow is enabled on the uplink portgroup.
         type: bool
         default: False
+        version_added: '1.5.0'
     block_all_ports:
         description:
             - Indicates if all ports are blocked on the uplink portgroup.
         type: bool
         default: False
+        version_added: '1.5.0'
 extends_documentation_fragment:
 - community.vmware.vmware.documentation
 '''
@@ -342,7 +345,7 @@ EXAMPLES = r'''
 '''
 
 RETURN = """
-result:
+dvs_portroup:
     description: information about performed operation
     returned: always
     type: dict
