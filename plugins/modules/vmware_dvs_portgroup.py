@@ -54,7 +54,7 @@ options:
     portgroup_type:
         description:
             - See VMware KB 1022312 regarding portgroup types.
-            - Deprecated. Will be removed in ???.
+            - Deprecated. Will be removed in collection 2.0.0.
         choices: ['earlyBinding', 'lateBinding', 'ephemeral']
         type: str
     port_binding:
@@ -110,7 +110,7 @@ options:
     vlan_trunk:
         description:
             - Indicates whether this is a VLAN trunk or not.
-            - Deprecated. Will be removed in ???.
+            - Deprecated. Will be removed in collection 2.0.0.
         required: False
         default: False
         type: bool
@@ -487,7 +487,7 @@ class VMwareDvsPortgroup(PyVmomi):
         self.netflow_enabled = self.module.params['netflow_enabled']
         self.block_all_ports = self.module.params['block_all_ports']
 
-        # NOTE: Deprecated options. Will be removed in ???
+        # NOTE: Deprecated options. Will be removed in collection 2.0.0
         self.portgroup_type = self.module.params['portgroup_type']
         self.vlan_trunk = self.module.params['vlan_trunk']
 
@@ -542,7 +542,7 @@ class VMwareDvsPortgroup(PyVmomi):
         results['num_ports'] = self.num_ports
         pg_spec.numPorts = self.num_ports
         # Port binding
-        # NOTE: 'self.portgroup_type' is deprecated. Will be removed in ???
+        # NOTE: 'self.portgroup_type' is deprecated. Will be removed in collection 2.0.0
         if self.portgroup_type:
             results['portgroup_type'] = self.portgroup_type
             pg_spec.type = self.portgroup_type
@@ -600,7 +600,7 @@ class VMwareDvsPortgroup(PyVmomi):
 
         # TODO: Traffic shaping
 
-        # NOTE: 'vlan_trunk' option is deprecated. Will be removed in ???
+        # NOTE: 'vlan_trunk' option is deprecated. Will be removed in collection 2.0.0
         if self.vlan_trunk or self.vlan_trunk_range:
             results['vlan_trunk_range'] = self.vlan_trunk_range
             result = self.check_trunk_vlan_config(pg_config=None)
@@ -791,7 +791,7 @@ class VMwareDvsPortgroup(PyVmomi):
     def check_trunk_vlan_config(self, pg_config):
         """Check trunk VLAN config"""
         changed_vlan_trunk_range = False
-        # NOTE: the following code is for backward compatibility only. Will be removed in ???
+        # NOTE: the following code is for backward compatibility only. Will be removed in collection 2.0.0
         if self.vlan_trunk:
             trunk_vlan_spec = vim.dvs.VmwareDistributedVirtualSwitch.TrunkVlanSpec()
             vlan_id_start, vlan_id_end = self.vlan_id.split('-')
@@ -920,7 +920,7 @@ class VMwareDvsPortgroup(PyVmomi):
         pg_config = self.dvs_portgroup.config
 
         # Check number of ports (only if option is specified)
-        # NOTE: 'self.portgroup_type' is deprecated. Will be removed in ???
+        # NOTE: 'self.portgroup_type' is deprecated. Will be removed in collection 2.0.0
         if self.port_binding == 'ephemeral' or self.portgroup_type == 'ephemeral':
             results['num_ports'] = 'n/a'
         else:
@@ -932,7 +932,7 @@ class VMwareDvsPortgroup(PyVmomi):
                 pg_spec.numPorts = self.num_ports
 
         # Check port binding
-        # NOTE: 'self.portgroup_type' is deprecated. Will be removed in ???
+        # NOTE: 'self.portgroup_type' is deprecated. Will be removed in collection 2.0.0
         if self.portgroup_type:
             results['portgroup_type'] = self.portgroup_type
             if pg_config.type != self.portgroup_type:
@@ -1028,7 +1028,7 @@ class VMwareDvsPortgroup(PyVmomi):
 
         # TODO: Check Traffic shaping
 
-        # NOTE: 'vlan_trunk' option is deprecated. Will be removed in ???
+        # NOTE: 'vlan_trunk' option is deprecated. Will be removed in collection 2.0.0
         if self.vlan_trunk or self.vlan_trunk_range:
             results['vlan_trunk_range'] = self.vlan_trunk_range
             if isinstance(pg_config.defaultPortConfig.vlan, vim.dvs.VmwareDistributedVirtualSwitch.VlanIdSpec):
@@ -1351,7 +1351,7 @@ def main():
             block_all_ports=dict(type='bool', default=False),
             # TODO: traffic shaping
             # TODO: traffic filtering and marking
-            # NOTE: The below parameters are deprecated starting from Ansible ???
+            # NOTE: The below parameters are deprecated starting from Ansible collection 2.0.0
             vlan_trunk=dict(type='bool', default=False, removed_in_version=2.11),
             portgroup_type=dict(
                 type='str', choices=['earlyBinding', 'lateBinding', 'ephemeral'], removed_in_version=2.11
