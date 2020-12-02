@@ -69,7 +69,7 @@ options:
         description:
             - Elastic port groups automatically increase or decrease the number of ports as needed.
             - Only valid if I(port_binding) is set to C(static).
-            - Will be 'elastic' if not specified and C(port_binding) is set to 'static'.
+            - Will be C(elastic) if not specified and I(port_binding) is set to C(static).
         required: True
         choices: ['fixed', 'elastic']
         type: str
