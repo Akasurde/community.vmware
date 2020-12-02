@@ -68,7 +68,7 @@ options:
     port_allocation:
         description:
             - Elastic port groups automatically increase or decrease the number of ports as needed.
-            - Only valid if C(port_binding) is set to 'static'.
+            - Only valid if I(port_binding) is set to C(static).
             - Will be 'elastic' if not specified and C(port_binding) is set to 'static'.
         required: True
         choices: ['fixed', 'elastic']
