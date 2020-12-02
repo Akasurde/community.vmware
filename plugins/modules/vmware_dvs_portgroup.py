@@ -79,6 +79,7 @@ options:
         description:
             - The Network Resource Pool the portgroup should be assigned to.
         default: 'default'
+        version_added: '1.5.0'
         type: str
     state:
         description:
