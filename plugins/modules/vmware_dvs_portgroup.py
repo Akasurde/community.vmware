@@ -48,7 +48,7 @@ options:
             - The number of ports the portgroup should contain.
             - The number of ports for a new portgroup will be 0 if not specified.
             - The vSphere Client uses 8 by default.
-            - This option will be ignored if C(port_binding) is set to 'ephemeral'.
+            - This option will be ignored if I(port_binding) is set to C(ephemeral).
         aliases: ['ports']
         type: int
     portgroup_type:
