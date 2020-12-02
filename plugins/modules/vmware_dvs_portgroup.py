@@ -340,7 +340,7 @@ RETURN = """
 result:
     description: information about performed operation
     returned: always
-    type: string
+    type: dict
     sample: {
         "adv_block_ports": true,
         "adv_netflow": false,
