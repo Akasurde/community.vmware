@@ -104,6 +104,8 @@ options:
             - This can be a combination of multiple ranges and numbers, example: [ 1-200, 205, 400-4094 ].
             - The default VLAN trunk range in the vSphere Client is [ 0-4094 ].
         type: list
+        elements: str
+        version_added: '1.5.0'
     vlan_trunk:
         description:
             - Indicates whether this is a VLAN trunk or not.
