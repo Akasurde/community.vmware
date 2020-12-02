@@ -74,6 +74,7 @@ options:
         required: True
         choices: ['fixed', 'elastic']
         type: str
+        version_added: '1.5.0'
     network_resource_pool:
         description:
             - The Network Resource Pool the portgroup should be assigned to.
