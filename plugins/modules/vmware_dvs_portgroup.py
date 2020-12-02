@@ -65,6 +65,7 @@ options:
         choices: ['static', 'dynamic', 'ephemeral']
         default: 'static'
         type: str
+        version_added: '1.5.0'
     port_allocation:
         description:
             - Elastic port groups automatically increase or decrease the number of ports as needed.
