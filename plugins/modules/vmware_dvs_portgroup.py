@@ -60,26 +60,25 @@ options:
     port_binding:
         description:
             - The type of port binding determines when ports in a port group are assigned to virtual machines.
-            - Valid attributes are static, dynamic, or ephemeral.
+            - Valid attributes are C(static), C(dynamic), or C(ephemeral).
             - See VMware KB 1022312 U(https://kb.vmware.com/s/article/1022312) for more details.
         choices: ['static', 'dynamic', 'ephemeral']
         default: 'static'
         type: str
-        version_added: '1.5.0'
+        version_added: '1.7.0'
     port_allocation:
         description:
             - Elastic port groups automatically increase or decrease the number of ports as needed.
             - Only valid if I(port_binding) is set to C(static).
             - Will be C(elastic) if not specified and I(port_binding) is set to C(static).
-        required: True
         choices: ['fixed', 'elastic']
         type: str
-        version_added: '1.5.0'
+        version_added: '1.7.0'
     network_resource_pool:
         description:
             - The Network Resource Pool the portgroup should be assigned to.
         default: 'default'
-        version_added: '1.5.0'
+        version_added: '1.7.0'
         type: str
     state:
         description:
@@ -98,15 +97,15 @@ options:
             - The secondary private VLAN ID.
             - The secondary private VLAN ID need to be configured on the dvSwitch first.
         type: int
-        version_added: '1.5.0'
+        version_added: '1.7.0'
     vlan_trunk_range:
         description:
             - The VLAN trunk range that should be configured with the portgroup.
-            - This can be a combination of multiple ranges and numbers, example: [ 1-200, 205, 400-4094 ].
-            - The default VLAN trunk range in the vSphere Client is [ 0-4094 ].
+            - "This can be a combination of multiple ranges and numbers, example: [ 1-200, 205, 400-4094 ]."
+            - "The default VLAN trunk range in the vSphere Client is [ 0-4094 ]."
         type: list
         elements: str
-        version_added: '1.5.0'
+        version_added: '1.7.0'
     vlan_trunk:
         description:
             - Indicates whether this is a VLAN trunk or not.
@@ -122,14 +121,14 @@ options:
                 type: bool
                 description: Indicates whether promiscuous mode is allowed.
                 default: False
-                aliases: [ promiscuous ]
+                aliases: ['promiscuous']
             forged_transmits:
                 type: bool
-                description: Indicates whether forged transmits are allowed
+                description: Indicates whether forged transmits are allowed.
                 default: False
             mac_changes:
                 type: bool
-                description: Indicates whether mac changes are allowed
+                description: Indicates whether mac changes are allowed.
                 default: False
         required: False
         default: {
@@ -137,45 +136,49 @@ options:
             forged_transmits: False,
             mac_changes: False,
         }
+        type: dict
         aliases: ['network_policy', 'security_policy']
     teaming:
         description:
             - Dictionary which configures the different teaming values for portgroup.
         suboptions:
             load_balancing:
-                type: string
+                type: str
                 description: Network adapter teaming policy.
-                choices: [ loadbalance_ip, loadbalance_srcmac, loadbalance_srcid, loadbalance_loadbased, failover_explicit ]
+                choices: ['loadbalance_ip', 'loadbalance_srcmac', 'loadbalance_srcid', 'loadbalance_loadbased', 'failover_explicit']
                 default: loadbalance_srcid
-                aliases: [ load_balancing_policy ]
+                aliases: ['load_balancing_policy']
             network_failure_detection:
-                type: string
+                type: str
                 description: Network failure detection.
-                choices: [ link_status_only, beacon_probing ]
+                choices: ['link_status_only', 'beacon_probing']
                 default: link_status_only
             notify_switches:
                 type: bool
                 description: Indicate whether or not to notify the physical switch if a link fails.
                 default: True
             failback:
-                type: True
+                type: bool
                 description: Indicate whether or not to use a failback when restoring links.
-                aliases: [ rolling_order ]
-            failover_order:
-                type: dict
-                description: Define uplink failover order. Default uplinks are used for active uplinks if not defined.
+                aliases: ['rolling_order']
+                default: True
             active_uplinks:
                 type: list
+                elements: str
                 description: List of active uplinks used for load balancing.
             standby_uplinks:
                 type: list
-                description: List of standby uplinks used for failover. All uplinks are used as active uplinks if C(active_uplinks) and C(standby_uplinks) are not defined.
+                elements: str
+                description:
+                - List of standby uplinks used for failover.
+                - All uplinks are used as active uplinks if C(active_uplinks) and C(standby_uplinks) are not defined.
         required: False
+        type: dict
         default: {
             'load_balancing': 'loadbalance_srcid',
             'network_failure_detection': 'link_status_only',
             'notify_switches': True,
-            'failback': True
+            'failback': True,
         }
         aliases: ['teaming_policy']
     advanced:
@@ -190,10 +193,10 @@ options:
                 type: bool
                 description: Indicates if the NetFlow policy can be changed per port.
                 default: False
-                aliases: [ ipfix_override ]
+                aliases: ['ipfix_override']
             network_rp_override:
                 type: bool
-                description: Indicates if the network resource pool can be changed per port
+                description: Indicates if the network resource pool can be changed per port.
                 default: false
             port_config_reset_at_disconnect:
                 type: bool
@@ -222,19 +225,20 @@ options:
             vlan_override:
                 type: bool
                 description: Indicates if the vlan can be changed per port.
-                default: false
+                default: False
+        type: dict
         required: False
         default: {
-            'traffic_filter_override': False,
-            'network_rp_override': False,
-            'security_override': False,
-            'vendor_config_override': False,
-            'port_config_reset_at_disconnect': True,
-            'uplink_teaming_override': False,
             'block_override': True,
+            'netflow_override': False,
+            'network_rp_override': False,
+            'port_config_reset_at_disconnect': True,
+            'security_override': False,
             'shaping_override': False,
-            'vlan_override': False,
-            'netflow_override': False
+            'traffic_filter_override': False,
+            'uplink_teaming_override': False,
+            'vendor_config_override': False,
+            'vlan_override': False
         }
         aliases: ['port_policy']
     netflow_enabled:
@@ -242,13 +246,13 @@ options:
             - Indicates if NetFlow is enabled on the uplink portgroup.
         type: bool
         default: False
-        version_added: '1.5.0'
+        version_added: '1.7.0'
     block_all_ports:
         description:
             - Indicates if all ports are blocked on the uplink portgroup.
         type: bool
         default: False
-        version_added: '1.5.0'
+        version_added: '1.7.0'
 extends_documentation_fragment:
 - community.vmware.vmware.documentation
 '''
@@ -1266,7 +1270,7 @@ def main():
             portgroup=dict(type='str', required=True, aliases=['portgroup_name']),
             description=dict(type='str', aliases=['portgroup_description']),
             vlan_id=dict(type='int', default=0),
-            vlan_trunk_range=dict(type='list'),
+            vlan_trunk_range=dict(type='list', elements='str'),
             private_vlan_id=dict(type='int'),
             num_ports=dict(type='int', aliases=['ports']),
             network_resource_pool=dict(type='str', default='default'),
@@ -1304,12 +1308,13 @@ def main():
                     ),
                     network_failure_detection=dict(
                         type='str',
-                        choices=['link_status_only', 'beacon_probing']
+                        choices=['link_status_only', 'beacon_probing'],
+                        default='link_status_only',
                     ),
                     notify_switches=dict(type='bool', default=True),
                     failback=dict(type='bool', default=True, aliases=['rolling_order']),
-                    active_uplinks=dict(type='list'),
-                    standby_uplinks=dict(type='list'),
+                    active_uplinks=dict(type='list', elements='str'),
+                    standby_uplinks=dict(type='list', elements='str'),
                 ),
                 default=dict(
                     network_failure_detection='link_status_only',
@@ -1352,9 +1357,15 @@ def main():
             # TODO: traffic shaping
             # TODO: traffic filtering and marking
             # NOTE: The below parameters are deprecated starting from Ansible collection 2.0.0
-            vlan_trunk=dict(type='bool', default=False, removed_in_version=2.11),
+            vlan_trunk=dict(
+                type='bool',
+                default=False,
+                removed_in_version='2.0.0',
+                removed_from_collection='community.vmware',
+                ),
             portgroup_type=dict(
-                type='str', choices=['earlyBinding', 'lateBinding', 'ephemeral'], removed_in_version=2.11
+                type='str', choices=['earlyBinding', 'lateBinding', 'ephemeral'], removed_in_version='2.0.0',
+                removed_from_collection='community.vmware',
             ),
         )
     )
@@ -1369,7 +1380,6 @@ def main():
 
     vmware_dvs_portgroup = VMwareDvsPortgroup(module)
     vmware_dvs_portgroup.process_state()
-
 
 if __name__ == '__main__':
     main()
