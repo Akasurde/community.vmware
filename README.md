@@ -137,6 +137,7 @@ Name | Description
 [community.vmware.vmware_guest_file_operation](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_file_operation_module.rst)|Files operation in a VMware guest operating system without network
 [community.vmware.vmware_guest_find](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_find_module.rst)|Find the folder path(s) for a virtual machine by name or UUID
 [community.vmware.vmware_guest_info](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_info_module.rst)|Gather info about a single VM
+[community.vmware.vmware_guest_instant_clone](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_instant_clone_module.rst)|Instant Clone VM
 [community.vmware.vmware_guest_move](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_move_module.rst)|Moves virtual machines in vCenter
 [community.vmware.vmware_guest_network](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_network_module.rst)|Manage network adapters of specified virtual machine in given vCenter infrastructure
 [community.vmware.vmware_guest_powerstate](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_powerstate_module.rst)|Manages power states of virtual machines in vCenter
@@ -146,6 +147,7 @@ Name | Description
 [community.vmware.vmware_guest_serial_port](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_serial_port_module.rst)|Manage serial ports on an existing VM
 [community.vmware.vmware_guest_snapshot](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_snapshot_module.rst)|Manages virtual machines snapshots in vCenter
 [community.vmware.vmware_guest_snapshot_info](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_snapshot_info_module.rst)|Gather info about virtual machine's snapshots in vCenter
+[community.vmware.vmware_guest_storage_policy](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_storage_policy_module.rst)|Set VM Home and disk(s) storage policy profiles.
 [community.vmware.vmware_guest_tools_info](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_tools_info_module.rst)|Gather info about VMware tools installed in VM
 [community.vmware.vmware_guest_tools_upgrade](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_tools_upgrade_module.rst)|Module to upgrade VMTools
 [community.vmware.vmware_guest_tools_wait](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_guest_tools_wait_module.rst)|Wait for VMware tools to become available
@@ -244,6 +246,11 @@ Name | Description
 [community.vmware.vmware_vswitch_info](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_vswitch_info_module.rst)|Gathers info about an ESXi host's vswitch configurations
 [community.vmware.vsphere_copy](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vsphere_copy_module.rst)|Copy a file to a VMware datastore
 [community.vmware.vsphere_file](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vsphere_file_module.rst)|Manage files on a vCenter datastore
+
+### Inventory plugins
+Name | Description
+--- | ---
+[community.vmware.vmware_vm_inventory](https://github.com/ansible-collections/community.vmware/blob/main/docs/community.vmware.vmware_vm_inventory_inventory.rst)|VMware Guest inventory source
 
 <!--end collection content-->
 
